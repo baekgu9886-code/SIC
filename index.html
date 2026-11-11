@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n-key="title">Space Image Converter</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+</head>
+
+<body>
+  <!-- 헤더: 로고·태그라인·언어 전환 -->
+  <header class="header">
+    <h1 data-i18n-key="header-title">Space Image Converter</h1>
+    <p class="tagline" data-i18n-key="tagline">
+      로그인 필요없음 서버전송없음 가장안전하고 빠른 이미지 변환기
+    </p>
+    <div class="lang-switch">
+      <button id="lang-en" class="secondary-pill-btn" data-i18n-key="lang-en">EN</button>
+      <button id="lang-ko" class="secondary-pill-btn" data-i18n-key="lang-ko">KO</button>
+    </div>
+  </header>
+
+  <!-- 메인 변환 섹션 -->
+  <main class="main">
+    <section class="converter card">
+      <h2 data-i18n-key="converter-title">이미지 변환</h2>
+
+      <!-- 드래그 앤 드롭 영역 -->
+      <div id="drop-zone" class="drop-zone" role="button" aria-label="이미지 파일을 여기로 드래그하거나 클릭하세요" tabindex="0">
+        <p data-i18n-key="drop-hint">이미지를 여기로 끌어다 놓으세요</p>
+        <p data-i18n-key="or">또는</p>
+        <button id="select-button" class="secondary-pill-btn" data-i18n-key="select-button">이미지 선택</button>
+        <input type="file" id="file-input" accept="image/*" style="display:none" />
+      </div>
+
+      <!-- 옵션: 픽셀 입력·포맷·품질 -->
+      <div class="options">
+        <div class="size-inputs">
+          <label for="width-input" data-i18n-key="width-label">가로 (px)</label>
+          <input type="number" id="width-input" min="1" placeholder="" />
+          <label for="height-input" data-i18n-key="height-label">세로 (px)</label>
+          <input type="number" id="height-input" min="1" placeholder="" />
+          <label for="lock-ratio" class="lock-ratio-label" data-i18n-key="lock-ratio">비율 유지</label>
+          <input type="checkbox" id="lock-ratio" checked />
+        </div>
+        <label for="format-select" data-i18n-key="format-label">포맷</label>
+        <select id="format-select">
+          <option value="image/jpeg" data-i18n-key="format-jpeg">JPEG</option>
+          <option value="image/png" data-i18n-key="format-png">PNG</option>
+          <option value="image/webp" data-i18n-key="format-webp">WebP</option>
+        </select>
+
+        <label for="quality-slider" data-i18n-key="quality-label">품질 (0-100)</label>
+        <input type="range" id="quality-slider" min="1" max="100" value="80" />
+        <span id="quality-value">80</span>
+      </div>
+
+      <!-- 프리뷰·다운로드·취소 -->
+      <div class="preview">
+        <canvas id="canvas" style="display:none"></canvas>
+        <img id="preview-img" alt="" />
+        <button id="download-button" class="secondary-pill-btn" data-i18n-key="download-button">다운로드</button>
+        <button id="cancel-button" class="secondary-pill-btn" data-i18n-key="cancel-button">이미지 취소</button>
+  <button id="colorAnalyzeBtn" class="secondary-pill-btn">🎨 AI 퍼스널 컬러 &amp; 운세 분석</button>
+  <div id="aiResult" class="ai-result"></div>
+      </div>
+    </section>
+
+    <!-- 피드백 섹션 -->
+    <section class="feedback card">
+      <h2 data-i18n-key="feedback-title">피드백</h2>
+      <form id="feedback-form">
+        <textarea id="feedback-input" rows="3" placeholder="피드백을 입력하세요..." maxlength="500"></textarea>
+        <button type="submit" class="secondary-pill-btn" data-i18n-key="submit-feedback">전송</button>
+      </form>
+      <ul id="feedback-list" class="feedback-list"></ul>
+    </section>
+  </main>
+
+  <!-- 토스트 메시지 -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

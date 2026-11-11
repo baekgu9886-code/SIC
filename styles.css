@@ -1,0 +1,284 @@
+/* styles.css
+   다크 스페이스 테마 UI 스타일
+   모든 UI 요소를 검은색/남색 배경에 은은한 별빛 효과와 네온 포인트 색상으로 구성합니다.
+   주요 색상:
+   - 배경: #0b0d17 (깊은 남색)
+   - 포인트: #66f0f0 (시안 네온)
+   - 텍스트: #e0e0e0 (밝은 회색)
+   - 버튼 배경: rgba(102,240,240,0.1) + hover 시 rgba(102,240,240,0.3)
+   - 토스트: 배경 #333, success #155724, error #721c24
+*/
+
+/* 전체 페이지 레이아웃 */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+  background: radial-gradient(circle at 20% 30%, #1a1c2b, #0b0d17 70%);
+  color: #e0e0e0;
+  overflow-x: hidden;
+}
+
+/* 별빛 효과 (옵션) */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwMCIgaGVpZ2h0PSIzMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxjaXJjbGUgY3g9IjMwMCIgY3k9IjMwMCIgcj0iMiIgZmlsbD0iI2ZmZiIgc3R5bGU9Im9wYWNpdHk6LjI7Ii8+PGNpcmNsZSBjeD0iNjAwIiBjeT0iNjAwIiByPSIyIiBmaWxsPSIjZmZmIiBzdHlsZT0ib3BhY2l0eTonLjI7Ii8+PGNpcmNsZSBjeD0iOTAwIiBjeT0iOTAwIiByPSIyIiBmaWxsPSIjZmZmIiBzdHlsZT0ib3BhY2l0eTonLjI7Ii8+PGNpcmNsZSBjeD0iMTIwMCIgY3k9IjExMDAiIHI9IjIiIGZpbGw9IiNmZmYiIHN0eWxlPSJvcGFjaXR5Oi4yOyIvPjwvc3ZnPg==') repeat;
+  animation: starfield 120s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+@keyframes starfield {
+  from { transform: translate3d(0,0,0); }
+  to { transform: translate3d(0,1000px,0); }
+}
+
+/* 헤더 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.6);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #66f0f0;
+}
+.lang-switch button {
+  background: rgba(102,240,240,0.15);
+  border: none;
+  color: #e0e0e0;
+  padding: 0.4rem 0.8rem;
+  margin-left: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.lang-switch button:hover {
+  background: rgba(102,240,240,0.3);
+}
+
+/* 메인 섹션 */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+section {
+  width: 100%;
+  max-width: 720px;
+  background: rgba(0,0,0,0.5);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #66f0f0;
+  font-size: 1.4rem;
+}
+
+/* 드롭존 */
+.drop-zone {
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
+}
+.drop-zone:hover, .drop-zone:focus {
+  background: rgba(255,255,255,0.05);
+  border-color: #66f0f0;
+}
+#select-button {
+  margin-top: 1rem;
+  background: rgba(102,240,240,0.2);
+  border: none;
+  color: #e0e0e0;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#select-button:hover {
+  background: rgba(102,240,240,0.35);
+}
+
+/* 픽셀 크기 입력 스타일 */
+.size-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.size-inputs input {
+  width: 80px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #e0e0e0;
+  padding: 0.3rem;
+  border-radius: 4px;
+}
+
+.options {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+.options label {
+  color: #e0e0e0;
+  margin-right: 0.5rem;
+}
+#format-select, #quality-slider {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #e0e0e0;
+  padding: 0.3rem;
+  border-radius: 4px;
+}
+#quality-value {
+  margin-left: 0.5rem;
+}
+
+/* 프리뷰 & 다운로드 */
+.preview {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+#preview-img {
+  max-width: 100%;
+  max-height: 300px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+#download-button {
+  background: rgba(102,240,240,0.25);
+  border: none;
+  color: #e0e0e0;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#download-button:hover {
+  background: rgba(102,240,240,0.4);
+}
+
+/* 피드백 섹션 */
+#feedback-form textarea {
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #e0e0e0;
+  padding: 0.8rem;
+  border-radius: 4px;
+  resize: vertical;
+}
+#feedback-form button {
+  margin-top: 0.5rem;
+  background: rgba(102,240,240,0.25);
+  border: none;
+  color: #e0e0e0;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#feedback-form button:hover {
+  background: rgba(102,240,240,0.4);
+}
+.feedback-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+.feedback-list li {
+  background: rgba(0,0,0,0.4);
+  margin-bottom: 0.5rem;
+  padding: 0.6rem;
+  border-radius: 4px;
+  color: #e0e0e0;
+}
+.feedback-list li small {
+  display: block;
+  color: #aaa;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+}
+
+/* 토스트 메시지 */
+.toast-container {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 1000;
+}
+.toast {
+  min-width: 200px;
+  padding: 0.8rem 1rem;
+  border-radius: 4px;
+  color: #fff;
+  background: #333;
+  opacity: 0.9;
+  animation: fadeInOut 4s forwards;
+}
+.toast-success { background: #155724; }
+.toast-error { background: #721c24; }
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 0.9; transform: translateY(0); }
+  90% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* AI 결과 영역 스타일 */
+.ai-result {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid #66f0f0;
+  border-radius: 4px;
+  color: #66f0f0;
+  font-family: 'Courier New', monospace;
+  white-space: pre-wrap;
+}
+
+/* 버튼 간 간격 및 정렬 */
+.preview button {
+  margin-right: 0.5rem;
+}
+
+/* 색상 분석 버튼 강조 */
+#colorAnalyzeBtn {
+  background: linear-gradient(45deg, #06b6d4, #ec4899);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+#colorAnalyzeBtn:hover {
+  transform: scale(1.05);
+}
+
+  .header h1 { font-size: 1.4rem; }
+  .options { flex-direction: column; align-items: flex-start; }
+}
+
