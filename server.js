@@ -16,11 +16,11 @@ const app = express();
 app.use(cors({origin: '*'}));
 
 // 정적 파일 제공: 현재 디렉터리(프로젝트 루트) 전체를 서빙
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // 라우트: 기본 경로('/') 로 접근하면 index.html 반환
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
